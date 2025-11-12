@@ -106,6 +106,12 @@ export const pageData = {
         ]
       },
       {
+        center: 'Coursera',
+        items: [
+          { name: 'Aspectos fundamentales para profesionales de la nube de AWS', link: "https://www.coursera.org/learn/aws-cloud-practitioner-essentials", completed: true }
+        ]
+      },
+      {
         center: 'Amazon Web Services',
         items: [
           { name: "Amazon Web Services (AWS) - Introducción a la arquitectura en AWS (Julio de 2023)", link: "https://www.linkedin.com/in/gabriel-mattesich/", completed: true },
@@ -117,7 +123,8 @@ export const pageData = {
         items: [
           { name: "Curso de Fundamentos de Arquitectura de Software", link: "https://platzi.com/p/GabrielMattesich/", completed: true },
           { name: "Curso de Introducción a los Patrones de Diseño de Software", link: "https://platzi.com/p/GabrielMattesich/", completed: true },
-          { name: "Curso de Node.js Avanzado", link: "https://platzi.com/p/GabrielMattesich/", completed: true }
+          { name: "Curso de Node.js Avanzado", link: "https://platzi.com/p/GabrielMattesich/", completed: true },
+          { name: "Fundamentos de Arquitectura de AWS", link: "https://platzi.com/p/GabrielMattesich/curso/11652-course/diploma/detalle/", completed: true },
         ]
       }
     ],
@@ -125,7 +132,7 @@ export const pageData = {
       {
         title: "Plataforma Agrícola",
         description: 'Plataforma agrícola para administración de cultivos, trazabilidad de genéticas, y operaciones de cultivo',
-        status: 'building',
+        status: 'running',
         started: "01/01/2025",
         key: "AGRICULTURAL_SYSTEM_DEMO",
         technologies: ["Next.js", "TypeScript", "AWS", "DynamoDB", "Algorand", "OS Serverless framework"],
@@ -230,9 +237,15 @@ export const pageData = {
       {
         center: 'Universidad Nacional Rio Cuarto',
         items: [
-          { name: 'Analista en CS. de la computación', link: "https://www.exa.unrc.edu.ar/analistaencomputacion/", completed: false }
+          { name: 'Computer Science', link: "https://www.exa.unrc.edu.ar/analistaencomputacion/", completed: false }
         ]
 
+      },
+      {
+        center: 'Coursera',
+        items: [
+          { name: 'AWS Cloud Practitioner Essentials', link: "https://www.coursera.org/learn/aws-cloud-practitioner-essentials", completed: true }
+        ]
       },
 
       {
@@ -247,7 +260,8 @@ export const pageData = {
         items: [
           { name: "Software Architecture Fundamentals Course", link: "https://platzi.com/p/GabrielMattesich/", completed: true },
           { name: "Introduction to Software Design Patterns Course", link: "https://platzi.com/p/GabrielMattesich/", completed: true },
-          { name: "Advanced Node.js Course", link: "https://platzi.com/p/GabrielMattesich/", completed: true }
+          { name: "Advanced Node.js Course", link: "https://platzi.com/p/GabrielMattesich/", completed: true },
+          { name: "Fundamentals of AWS Architecture Course", link: "https://platzi.com/p/GabrielMattesich/curso/11652-course/diploma/detalle/", completed: true },
         ]
       }
     ],
@@ -255,7 +269,7 @@ export const pageData = {
       {
         title: "Agricultural Platform",
         description: 'Agricultural platform for crop management, genetics tracking, and farming operations',
-        status: 'building',
+        status: 'running',
         started: "01/01/2025",
         key: "AGRICULTURAL_SYSTEM_DEMO",
         technologies: ["Next.js", "TypeScript", "AWS", "DynamoDB", "Algorand", "OS Serverless framework"],

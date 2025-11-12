@@ -408,7 +408,7 @@ export default function Portfolio() {
                                     className={
                                       project.status === "building"
                                         ? "bg-yellow-600/80 text-white animate-pulse"
-                                        : project.status === "completed"
+                                        : project.status === "running"
                                         ? "bg-green-600/80 text-white"
                                         : "bg-gray-600/80 text-white"
                                     }
@@ -417,10 +417,10 @@ export default function Portfolio() {
                                       ? language === "es"
                                         ? "En construcción"
                                         : "Building"
-                                      : project.status === "completed"
+                                      : project.status === "running"
                                       ? language === "es"
-                                        ? "Completado"
-                                        : "Completed"
+                                        ? "En ejecución"
+                                        : "Running"
                                       : project.status}
                                   </Badge>
                                 </div>
