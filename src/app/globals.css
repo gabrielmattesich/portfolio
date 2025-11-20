@@ -3,7 +3,11 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
+  /* ============================================ */
+  /* DARK MODE - Default Theme */
+  /* ============================================ */
+  :root,
+  .dark {
     --background: 223 84% 5%;
     --foreground: 0 0% 98%;
 
@@ -32,14 +36,104 @@
     --destructive-foreground: 0 0% 98%;
 
     --ring: 195 100% 50%;
-
     --radius: 1rem;
 
-    /* Glassmorphism colors */
-    --glass-primary: 195 100% 50%;
-    --glass-secondary: 262 83% 58%;
-    --glass-accent: 142 71% 45%;
-    --glass-highlight: 43 96% 56%;
+    /* Theme-specific colors */
+    --theme-bg-primary: 15 23% 8%;
+    --theme-bg-secondary: 26 11% 6%;
+    --theme-text-primary: 0 0% 98%;
+    --theme-text-secondary: 0 0% 65%;
+    --theme-accent-1: 189 94% 43%;
+    --theme-accent-2: 271 81% 56%;
+    --theme-accent-3: 142 71% 45%;
+  }
+
+  /* ============================================ */
+  /* LIGHT MODE - Modern & Elegant */
+  /* ============================================ */
+  .light {
+    --background: 210 20% 98%;
+    --foreground: 222 47% 11%;
+
+    --muted: 210 40% 92%;
+    --muted-foreground: 215 20% 40%;
+
+    --accent: 210 40% 94%;
+    --accent-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --border: 214 20% 85%;
+    --input: 214 20% 92%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --primary: 195 100% 45%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 142 76% 40%;
+    --secondary-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --ring: 195 100% 45%;
+    --radius: 1rem;
+
+    /* Theme-specific colors */
+    --theme-bg-primary: 210 20% 98%;
+    --theme-bg-secondary: 220 15% 95%;
+    --theme-text-primary: 222 47% 11%;
+    --theme-text-secondary: 215 20% 35%;
+    --theme-accent-1: 195 100% 45%;
+    --theme-accent-2: 271 81% 60%;
+    --theme-accent-3: 142 76% 40%;
+  }
+
+  /* ============================================ */
+  /* TECH MODE - Neon/Cyberpunk Theme */
+  /* ============================================ */
+  .tech {
+    --background: 240 10% 3.9%;
+    --foreground: 180 100% 90%;
+
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 180 50% 70%;
+
+    --accent: 180 100% 25%;
+    --accent-foreground: 180 100% 90%;
+
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 180 100% 90%;
+
+    --border: 180 50% 20%;
+    --input: 180 50% 15%;
+
+    --card: 240 5% 8%;
+    --card-foreground: 180 100% 90%;
+
+    --primary: 189 94% 43%;
+    --primary-foreground: 0 0% 0%;
+
+    --secondary: 280 100% 70%;
+    --secondary-foreground: 0 0% 0%;
+
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 0 0% 98%;
+
+    --ring: 189 94% 43%;
+    --radius: 1rem;
+
+    /* Theme-specific colors */
+    --theme-bg-primary: 240 10% 4%;
+    --theme-bg-secondary: 240 10% 8%;
+    --theme-text-primary: 180 100% 90%;
+    --theme-text-secondary: 180 50% 70%;
+    --theme-accent-1: 189 94% 43%;
+    --theme-accent-2: 280 100% 70%;
+    --theme-accent-3: 142 100% 45%;
   }
 }
 
@@ -76,6 +170,11 @@
 /* Glassmorphism utilities */
 .glass-card {
   @apply bg-white/[0.08] backdrop-blur-xl border border-white/[0.15] shadow-2xl shadow-black/25 rounded-2xl;
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  @apply border-white/[0.25] shadow-cyan-500/10;
 }
 
 .glass-container {
@@ -90,23 +189,240 @@
   @apply bg-black/20 backdrop-blur-md;
 }
 
-/* Mesh gradient background */
-.mesh-gradient {
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Better mobile spacing */
+@media (max-width: 768px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* Improve touch targets for mobile */
+@media (max-width: 768px) {
+  button, a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* ============================================ */
+/* Mesh gradient backgrounds per theme */
+/* ============================================ */
+
+/* Dark Mode Gradient */
+.dark .mesh-gradient,
+:root .mesh-gradient {
   background: linear-gradient(135deg, #0F1419 0%, #1A0B3D 50%, #0F1419 100%);
   position: relative;
 }
 
-.mesh-gradient::before {
+.dark .mesh-gradient::before,
+:root .mesh-gradient::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: 
+  background:
     radial-gradient(circle at 20% 30%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
     radial-gradient(circle at 80% 70%, rgba(124, 58, 237, 0.1) 0%, transparent 50%),
     radial-gradient(circle at 60% 20%, rgba(16, 185, 129, 0.08) 0%, transparent 50%);
   pointer-events: none;
+}
+
+/* Light Mode Gradient - Modern & Soft */
+.light .mesh-gradient {
+  background: linear-gradient(135deg,
+    #F8FAFC 0%,
+    #EFF6FF 25%,
+    #F0F9FF 50%,
+    #ECFDF5 75%,
+    #F8FAFC 100%
+  );
+  position: relative;
+}
+
+.light .mesh-gradient::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(circle at 15% 25%, rgba(6, 182, 212, 0.12) 0%, transparent 45%),
+    radial-gradient(circle at 85% 75%, rgba(168, 85, 247, 0.10) 0%, transparent 45%),
+    radial-gradient(circle at 50% 50%, rgba(34, 197, 94, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 70% 20%, rgba(251, 146, 60, 0.06) 0%, transparent 35%);
+  pointer-events: none;
+  animation: lightPulse 15s ease-in-out infinite;
+}
+
+@keyframes lightPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.85; }
+}
+
+/* Tech Mode Gradient - Neon/Cyberpunk */
+.tech .mesh-gradient {
+  background: linear-gradient(135deg, #000000 0%, #0a0a1a 50%, #000000 100%);
+  position: relative;
+}
+
+.tech .mesh-gradient::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(0, 255, 255, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(255, 0, 255, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 60% 20%, rgba(0, 255, 128, 0.12) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(255, 128, 0, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+  animation: techPulse 8s ease-in-out infinite;
+}
+
+@keyframes techPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+/* Tech Mode - Neon glow effects */
+.tech .glass-card {
+  box-shadow:
+    0 0 20px rgba(0, 255, 255, 0.1),
+    0 0 40px rgba(255, 0, 255, 0.05);
+}
+
+.tech .glass-card:hover {
+  box-shadow:
+    0 0 30px rgba(0, 255, 255, 0.2),
+    0 0 60px rgba(255, 0, 255, 0.1);
+}
+
+/* Light Mode - Modern Glass Effects */
+.light .glass-card {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(6, 182, 212, 0.15);
+  box-shadow:
+    0 8px 32px 0 rgba(6, 182, 212, 0.08),
+    0 4px 16px 0 rgba(168, 85, 247, 0.06),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.8);
+}
+
+.light .glass-card:hover {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(6, 182, 212, 0.25);
+  box-shadow:
+    0 12px 40px 0 rgba(6, 182, 212, 0.12),
+    0 6px 20px 0 rgba(168, 85, 247, 0.08),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
+
+.light .glass-container {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(6, 182, 212, 0.12);
+  box-shadow:
+    0 4px 24px 0 rgba(6, 182, 212, 0.06),
+    0 2px 12px 0 rgba(168, 85, 247, 0.04),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.7);
+}
+
+/* Light Mode - Text colors with better contrast */
+.light h1, .light h2, .light h3, .light h4, .light h5, .light h6 {
+  color: hsl(222, 47%, 11%);
+}
+
+.light p, .light span, .light div {
+  color: hsl(215, 25%, 27%);
+}
+
+/* Light Mode - Navbar styling */
+.light nav {
+  background: rgba(255, 255, 255, 0.7) !important;
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(6, 182, 212, 0.15);
+  box-shadow: 0 4px 16px rgba(6, 182, 212, 0.08);
+}
+
+/* Light Mode - Badge & Button improvements */
+.light .bg-cyan-500\/20 {
+  background-color: rgba(6, 182, 212, 0.15) !important;
+  border-color: rgba(6, 182, 212, 0.3) !important;
+}
+
+.light .text-cyan-400,
+.light .text-cyan-300 {
+  color: rgb(8, 145, 178) !important;
+}
+
+.light .text-purple-400 {
+  color: rgb(147, 51, 234) !important;
+}
+
+.light .text-emerald-400 {
+  color: rgb(16, 185, 129) !important;
+}
+
+.light .text-slate-300,
+.light .text-slate-400 {
+  color: hsl(215, 20%, 40%) !important;
+}
+
+.light .text-white {
+  color: hsl(222, 47%, 11%) !important;
+}
+
+/* Light Mode - Gradient text improvements */
+.light .bg-clip-text {
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.light .bg-gradient-to-r.from-cyan-400.to-purple-500 {
+  background-image: linear-gradient(to right, rgb(6, 182, 212), rgb(168, 85, 247)) !important;
+}
+
+.light .bg-gradient-to-r.from-emerald-400.to-cyan-500 {
+  background-image: linear-gradient(to right, rgb(16, 185, 129), rgb(6, 182, 212)) !important;
+}
+
+.light .bg-gradient-to-r.from-purple-400.to-pink-500 {
+  background-image: linear-gradient(to right, rgb(168, 85, 247), rgb(236, 72, 153)) !important;
+}
+
+.light .bg-gradient-to-r.from-orange-400.to-red-500 {
+  background-image: linear-gradient(to right, rgb(251, 146, 60), rgb(239, 68, 68)) !important;
+}
+
+/* Light Mode - Profile image border */
+.light .border-white\/20 {
+  border-color: rgba(6, 182, 212, 0.2) !important;
+}
+
+/* Light Mode - Timeline dot colors */
+.light .bg-green-400 {
+  background-color: rgb(34, 197, 94) !important;
+  border-color: rgb(34, 197, 94) !important;
+}
+
+.light .bg-cyan-500 {
+  background-color: rgb(6, 182, 212) !important;
+  border-color: rgb(6, 182, 212) !important;
 }
 

@@ -36,8 +36,19 @@ export const pageData = {
         role: "Software Developer",
         period: "Julio 2025 - En curso",
         location: "Córdoba, Argentina",
-        conclusion: "",
-        description: []
+        conclusion: "Trabajo en el impacto económico del país a través del desarrollo de soluciones utilizando microservicios y arquitectura dirigida por eventos.",
+        description: [
+          "Desarrollo de soluciones utilizando microservicios.",
+          "Desarrollo de soluciones utilizando arquitectura dirigida por eventos.",
+        ]
+      },
+      {
+        company: "Universidad Nacional de Cuyo - Facultad de Ciencias Agrarias",
+        role: "Software Developer",
+        period: "Noviembre 2025 - En curso",
+        location: "Mendoza, Argentina",
+        conclusion: "Trabajar en la gestión de software para investigación es una experiencia increíble. Permite aprender mucho y colaborar con profesores y estudiantes de diferentes áreas.",
+        description: ["Gestión de software para investigación", "Colaboración con profesores y estudiantes"]
       },
       {
         company: "Naranja X",
@@ -171,8 +182,22 @@ export const pageData = {
         role: "Software Developer",
         period: "July 2025 - Current",
         location: "Córdoba, Argentina",
-        conclusion: "",
-        description: []
+        conclusion: "Work in the impact of the country's economy through the development of solutions using microservices and event-driven architecture.",
+        description: [
+          "Development of solutions using microservices.",
+          "Development of solutions using event-driven architecture.",
+        ]
+      },
+      {
+        company: "Universidad Nacional de Cuyo - Facultad de Ciencias Agrarias",
+        role: "Software Developer",
+        period: "November 2022 - April 2025",
+        location: "Mendoza, Argentina",
+        conclusion: "Worked in the development of software for research, collaboration with professors and students is a great experience for me.",
+        description: [
+          "Management of software for research",
+          "Collaboration with professors and students"
+        ]
       },
       {
         company: "Naranja X",

@@ -2,7 +2,16 @@
 const nextConfig = {
     distDir: 'out',
     images: {
-        domains: ['media.licdn.com', 'github-readme-stats.vercel.app'],
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'media.licdn.com',
+            },
+            {
+                protocol: 'https',
+                hostname: 'github-readme-stats.vercel.app',
+            },
+        ],
     },
 };
 
