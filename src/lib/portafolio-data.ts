@@ -36,7 +36,7 @@ export const pageData = {
         role: "Software Developer",
         period: "Julio 2025 - En curso",
         location: "Córdoba, Argentina",
-        conclusion: "Trabajo en el impacto económico del país a través del desarrollo de soluciones utilizando microservicios y arquitectura dirigida por eventos.",
+        conclusion: "Trabajar a diario en soluciones que impactan en el dia a dia de las personas es una experiencia increíble y me permite crecer como profesional.",
         description: [
           "Desarrollo de soluciones utilizando microservicios.",
           "Desarrollo de soluciones utilizando arquitectura dirigida por eventos.",
@@ -182,7 +182,7 @@ export const pageData = {
         role: "Software Developer",
         period: "July 2025 - Current",
         location: "Córdoba, Argentina",
-        conclusion: "Work in the impact of the country's economy through the development of solutions using microservices and event-driven architecture.",
+        conclusion: "Work on daily solutions that impact the daily life of people is an incredible experience and allows me to grow as a professional.",
         description: [
           "Development of solutions using microservices.",
           "Development of solutions using event-driven architecture.",
