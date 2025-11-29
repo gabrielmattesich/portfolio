@@ -141,13 +141,7 @@ export default function Portfolio() {
                   transition={{ delay: 0.6 }}
                   className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start"
                 >
-                  <Button
-                    onClick={handleCVDownload}
-                    className="bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-600 hover:to-cyan-600 text-white px-8 py-6 text-base md:text-lg rounded-xl shadow-2xl shadow-cyan-500/25 border border-white/20 font-semibold"
-                  >
-                    <FileDown className="mr-2 h-5 w-5" />
-                    {language === "es" ? "Descargar CV" : "Download CV"}
-                  </Button>
+                 
 
                   <Button
                     onClick={() => window.open("mailto:mattesichgabriel@gmail.com", "_blank")}
@@ -784,13 +778,7 @@ export default function Portfolio() {
             >
               <Mail size={20} />
             </a>
-            <Button
-              onClick={handleCVDownload}
-              className="px-6 py-3 bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-600 hover:to-cyan-600 text-white rounded-xl font-medium shadow-lg"
-            >
-              <FileDown className="mr-2 h-4 w-4" />
-              CV
-            </Button>
+            
           </div>
         </div>
       </div>
@@ -830,20 +818,7 @@ export default function Portfolio() {
             </span>
           </motion.a>
 
-          <motion.button
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            whileHover={{ scale: 1.1 }}
-            transition={{ delay: 0.3 }}
-            onClick={handleCVDownload}
-            className="group relative p-4 rounded-full bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white shadow-lg hover:shadow-purple-500/50 transition-all duration-300 border border-white/20"
-            aria-label="Download CV"
-          >
-            <FileDown size={22} />
-            <span className="absolute right-full mr-3 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-black/90 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-              {language === "es" ? "Descargar CV" : "Download CV"}
-            </span>
-          </motion.button>
+          
         </AnimatePresence>
       </div>
 

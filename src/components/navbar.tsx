@@ -1,10 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Menu, X, FileDown } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
 import ThemeToggle from "@/components/theme-toggle";
 
 interface NavbarProps {
@@ -73,14 +72,7 @@ export default function Navbar({ language, onLanguageChange, onCVDownload }: Nav
               </button>
             </div>
 
-            {/* CV Download Button */}
-            <Button
-              onClick={onCVDownload}
-              className="bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-600 hover:to-cyan-600 text-white px-4 py-2 text-xs md:text-sm rounded-xl shadow-lg border border-white/20"
-            >
-              <FileDown className="mr-2 h-4 w-4" />
-              {language === "es" ? "Descargar CV" : "Download CV"}
-            </Button>
+           
           </div>
 
           {/* Mobile Menu Button */}
@@ -151,20 +143,6 @@ export default function Navbar({ language, onLanguageChange, onCVDownload }: Nav
                       🌎 English
                     </button>
                   </div>
-                </div>
-
-                {/* CV Download Button Mobile */}
-                <div className="px-2">
-                  <Button
-                    onClick={() => {
-                      onCVDownload();
-                      closeMobileMenu();
-                    }}
-                    className="w-full bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-600 hover:to-cyan-600 text-white px-4 py-3 text-sm rounded-xl shadow-lg border border-white/20"
-                  >
-                    <FileDown className="mr-2 h-4 w-4" />
-                    {language === "es" ? "Descargar CV" : "Download CV"}
-                  </Button>
                 </div>
               </div>
             </motion.div>
