@@ -56,6 +56,15 @@ const config: Config = {
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
   		},
+  		backdropBlur: {
+  			'xs': '2px',
+  			'sm': '4px',
+  			'md': '8px',
+  			'lg': '12px',
+  			'xl': '16px',
+  			'2xl': '40px',
+  			'3xl': '64px'
+  		},
   		keyframes: {
   			'accordion-down': {
   				from: {
