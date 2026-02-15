@@ -63,7 +63,7 @@ const skillsData = {
         icon: Cpu,
         color: "from-indigo-500 to-violet-500",
         skills: [
-          "Python", "Java", "Testing", "Agile",
+          "Python", "Testing", "Agile",
           "Scrum", "Clean Code", "Design Patterns"
         ]
       }
@@ -114,7 +114,7 @@ const skillsData = {
         icon: GitBranch,
         color: "from-yellow-500 to-amber-500",
         skills: [
-          "Git", "GitHub", "GitLab", "Bitbucket",
+          "Git", "GitHub", "GitLab",
           "Git Flow", "Code Review"
         ]
       },
@@ -123,7 +123,7 @@ const skillsData = {
         icon: Cpu,
         color: "from-indigo-500 to-violet-500",
         skills: [
-          "Python", "Java", "Testing", "Agile",
+          "Python", "Testing", "Agile",
           "Scrum", "Clean Code", "Design Patterns"
         ]
       }
