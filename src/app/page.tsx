@@ -430,7 +430,7 @@ export default function Portfolio() {
                         </h4>
                       </div>
                       <p className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500 mb-1">
-                        50+
+                        10
                       </p>
                       <p className="text-sm text-slate-400">
                         {language === "es" ? "Completados" : "Completed"}
