@@ -58,10 +58,10 @@ export default function Navbar({ language, onLanguageChange }: NavbarProps) {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className="sticky top-0 z-50 bg-black/40 backdrop-blur-xl border-b border-white/10 h-16 flex items-center"
+      className="sticky top-0 z-50 w-full bg-black/40 backdrop-blur-xl border-b border-white/10"
     >
-      <div className="container mx-auto px-4 py-3">
-        <div className="flex items-center justify-between">
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <motion.button
             onClick={() => scrollToSection("inicio")}
@@ -143,9 +143,9 @@ export default function Navbar({ language, onLanguageChange }: NavbarProps) {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
-              className="md:hidden overflow-hidden mt-3 rounded-2xl glass-container p-4 border border-white/10"
+              className="md:hidden overflow-hidden"
             >
-              <div className="space-y-4">
+              <div className="mt-2 mb-4 space-y-4 rounded-2xl glass-container p-4 border border-white/10">
                 {/* Navigation Links Mobile */}
                 <div className="flex flex-col gap-2">
                   {navItems.map((item) => (
