@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.7](https://github.com/gabrielmattesich/portafolio/compare/v1.1.5...v1.1.7) (2026-06-09)
+
+
+### Bug Fixes
+
+* coursers ([9b1c0e5](https://github.com/gabrielmattesich/portafolio/commit/9b1c0e513adf894433f82db4a559dcbbc928efcd))
+* photo ([6f6cf47](https://github.com/gabrielmattesich/portafolio/commit/6f6cf470f0746a95f2df25b5a9e9ce5e7910f4fb))
+* refactor ([92e7d83](https://github.com/gabrielmattesich/portafolio/commit/92e7d83e1d21cf0ec6e023510ec99a5d1f03d30b))
+* rm cv ([8cf02c1](https://github.com/gabrielmattesich/portafolio/commit/8cf02c19af2b381692724b70d935bd8836168f66))
+* rm cv ([a796bf9](https://github.com/gabrielmattesich/portafolio/commit/a796bf9d4f04c3fca6fd063b91dd86422855c4fd))
+* styles ([df1de05](https://github.com/gabrielmattesich/portafolio/commit/df1de05ac5b33c0085d874be06d62a7f157974e7))
+* styles ([4af052a](https://github.com/gabrielmattesich/portafolio/commit/4af052a11a09e51dec8e851e48c1844977c95176))
+* tutorials ([44b492f](https://github.com/gabrielmattesich/portafolio/commit/44b492f560fa17c780b996d199ba1a3cc58cc8c5))
+
 ### [1.1.5](https://github.com/gabrielmattesich/portafolio/compare/v0.1.2...v1.1.5) (2025-05-28)
 
 
