@@ -6,7 +6,7 @@ import {
   Mail,
   Github,
   Linkedin,
-  FileDown,
+  Compass,
   Menu,
   X,
   MapPin,
@@ -28,7 +28,6 @@ import { cn } from "@/lib/utils";
 import { pageData } from "@/lib/portafolio-data";
 import AnimatedBackground from "@/components/animated-background";
 import { Button } from "@/components/ui/button";
-import CVDownloadDialog from "@/components/cv-download";
 import TimeCounter from "@/components/time-counter";
 import SkillsSection from "@/components/skills-section";
 import Navbar from "@/components/navbar";
@@ -37,7 +36,7 @@ export default function Portfolio() {
   const [language, setLanguage] = useState<"es" | "en">("es");
   const [metadata, setMetadata] = useState(pageData[language]);
   const [mounted, setMounted] = useState(false);
-  const [showCVDialog, setShowCVDialog] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -51,10 +50,6 @@ export default function Portfolio() {
     setLanguage(lang);
   };
 
-  const handleCVDownload = () => {
-    setShowCVDialog(true);
-  };
-
   if (!mounted) return null;
 
   return (
@@ -63,11 +58,10 @@ export default function Portfolio() {
       <Navbar
         language={language}
         onLanguageChange={changeLanguage}
-        onCVDownload={handleCVDownload}
       />
 
       {/* Hero Section - Redesigned */}
-      <section className="relative overflow-hidden min-h-[85vh] flex items-center">
+      <section id="inicio" className="relative overflow-hidden min-h-[85vh] flex items-center">
         {/* Animated Background */}
         <AnimatedBackground />
 
@@ -183,7 +177,7 @@ export default function Portfolio() {
       </section>
 
       {/* GitHub Activity - Enhanced */}
-      <section className="py-16 md:py-20 relative">
+      <section id="github" className="py-16 md:py-20 relative">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -267,10 +261,12 @@ export default function Portfolio() {
       </section>
 
       {/* Skills Section */}
-      <SkillsSection language={language} />
+      <div id="stack">
+        <SkillsSection language={language} />
+      </div>
 
       {/* Main Content */}
-      <section className="py-16 md:py-20 relative">
+      <section id="sobre-mi" className="py-16 md:py-20 relative">
         <div className="container mx-auto px-4">
           {/* Section Header */}
           <motion.div
@@ -758,77 +754,98 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* Quick Contact - Fixed Bottom Bar for Mobile */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden">
-        <div className="glass-container mx-4 mb-4 p-3 rounded-2xl">
-          <div className="flex items-center justify-around gap-2">
-            <a
-              href="https://www.linkedin.com/in/gabriel-mattesich"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 rounded-xl bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 transition-all duration-300 border border-blue-500/30"
-              aria-label="LinkedIn"
-            >
-              <Linkedin size={20} />
-            </a>
-            <a
-              href="mailto:mattesichgabriel@gmail.com"
-              className="p-3 rounded-xl bg-green-600/20 hover:bg-green-600/40 text-green-400 transition-all duration-300 border border-green-500/30"
-              aria-label="Email"
-            >
-              <Mail size={20} />
-            </a>
-            
-          </div>
-        </div>
-      </div>
-
-      {/* Floating Quick Actions - Desktop */}
-      <div className="fixed right-6 bottom-6 z-50 hidden md:flex flex-col gap-3">
+      {/* Floating Quick Actions Menu - Responsive */}
+      <div className="fixed right-6 bottom-6 z-50 flex flex-col items-end gap-3">
         <AnimatePresence>
-          <motion.a
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            whileHover={{ scale: 1.1 }}
-            transition={{ delay: 0.1 }}
-            href="https://www.linkedin.com/in/gabriel-mattesich"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group relative p-4 rounded-full bg-blue-600/80 hover:bg-blue-600 text-white shadow-lg hover:shadow-blue-500/50 transition-all duration-300 border border-white/20"
-            aria-label="LinkedIn"
-          >
-            <Linkedin size={22} />
-            <span className="absolute right-full mr-3 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-black/90 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-              LinkedIn
-            </span>
-          </motion.a>
+          {isMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: 20, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 20, scale: 0.95 }}
+              transition={{ duration: 0.2 }}
+              className="flex flex-col gap-3 items-end mb-2"
+            >
+              {/* Navigation Section Links */}
+              {[
+                { id: "inicio", label: language === "es" ? "Inicio" : "Home", icon: Star, color: "bg-cyan-600/80 hover:bg-cyan-600" },
+                { id: "github", label: language === "es" ? "Actividad" : "GitHub", icon: Github, color: "bg-purple-600/80 hover:bg-purple-600" },
+                { id: "stack", label: language === "es" ? "Stack" : "Stack", icon: Code2, color: "bg-emerald-600/80 hover:bg-emerald-600" },
+                { id: "sobre-mi", label: language === "es" ? "Sobre Mí" : "About Me", icon: Briefcase, color: "bg-orange-600/80 hover:bg-orange-600" },
+              ].map((item, index) => {
+                const IconComponent = item.icon;
+                return (
+                  <motion.button
+                    key={item.id}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.05 }}
+                    onClick={() => {
+                      const element = document.getElementById(item.id);
+                      if (element) {
+                        element.scrollIntoView({ behavior: "smooth" });
+                        setIsMenuOpen(false);
+                      }
+                    }}
+                    className={`group relative p-3 rounded-full ${item.color} text-white shadow-lg transition-all duration-300 border border-white/20 flex items-center justify-center`}
+                    aria-label={item.label}
+                  >
+                    <IconComponent size={20} />
+                    <span className="absolute right-full mr-3 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-black/95 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                      {item.label}
+                    </span>
+                  </motion.button>
+                );
+              })}
 
-          <motion.a
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            whileHover={{ scale: 1.1 }}
-            transition={{ delay: 0.2 }}
-            href="mailto:mattesichgabriel@gmail.com"
-            className="group relative p-4 rounded-full bg-green-600/80 hover:bg-green-600 text-white shadow-lg hover:shadow-green-500/50 transition-all duration-300 border border-white/20"
-            aria-label="Email"
-          >
-            <Mail size={22} />
-            <span className="absolute right-full mr-3 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-black/90 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-              {language === "es" ? "Contactar" : "Contact"}
-            </span>
-          </motion.a>
+              {/* Separator line */}
+              <div className="w-8 h-[1px] bg-white/20 my-1 self-center" />
 
-          
+              {/* LinkedIn Button */}
+              <motion.a
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.25 }}
+                href="https://www.linkedin.com/in/gabriel-mattesich"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative p-3.5 rounded-full bg-blue-600/80 hover:bg-blue-600 text-white shadow-lg hover:shadow-blue-500/50 transition-all duration-300 border border-white/20 flex items-center justify-center"
+                aria-label="LinkedIn"
+              >
+                <Linkedin size={20} />
+                <span className="absolute right-full mr-3 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-black/90 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                  LinkedIn
+                </span>
+              </motion.a>
+
+              {/* Email Button */}
+              <motion.a
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.3 }}
+                href="mailto:mattesichgabriel@gmail.com"
+                className="group relative p-3.5 rounded-full bg-green-600/80 hover:bg-green-600 text-white shadow-lg hover:shadow-green-500/50 transition-all duration-300 border border-white/20 flex items-center justify-center"
+                aria-label="Email"
+              >
+                <Mail size={20} />
+                <span className="absolute right-full mr-3 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-black/90 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                  {language === "es" ? "Contactar" : "Contact"}
+                </span>
+              </motion.a>
+            </motion.div>
+          )}
         </AnimatePresence>
+
+        {/* Main Floating Action Button Toggle */}
+        <motion.button
+          whileTap={{ scale: 0.95 }}
+          whileHover={{ scale: 1.05 }}
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="p-4 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 text-white shadow-xl hover:shadow-cyan-500/30 transition-all duration-300 border border-white/30 z-50 flex items-center justify-center"
+          aria-label="Toggle menu"
+        >
+          {isMenuOpen ? <X size={24} /> : <Compass size={24} className="animate-spin-slow" />}
+        </motion.button>
       </div>
-
-
-      {/* CV Download Dialog */}
-      <CVDownloadDialog
-        open={showCVDialog}
-        onOpenChange={setShowCVDialog}
-        language={language}
-      />
 
       {/* Footer */}
       <footer className="py-12 md:py-16 bg-black/40 backdrop-blur-md border-t border-white/10 mt-20 mb-20 md:mb-0">

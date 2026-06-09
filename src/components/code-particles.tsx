@@ -106,8 +106,7 @@ export default function CodeParticles() {
     const animate = () => {
       if (!canvas || !ctx) return;
 
-      ctx.fillStyle = 'rgba(15, 20, 25, 0.02)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       particlesRef.current.forEach(particle => {
         updateParticle(particle);
@@ -129,7 +128,10 @@ export default function CodeParticles() {
 
   return (
     <div className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
-      
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 w-full h-full pointer-events-none"
+      />
     </div>
   );
 }

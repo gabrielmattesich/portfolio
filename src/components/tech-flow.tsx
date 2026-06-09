@@ -27,7 +27,7 @@ export default function TechFlow() {
 
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight * 0.7; // 70% of viewport height
+      canvas.height = canvas.parentElement ? canvas.parentElement.clientHeight : window.innerHeight;
       initParticles();
     };
 
@@ -50,9 +50,9 @@ export default function TechFlow() {
 
     const getRandomColor = (opacity: number) => {
       const colors = [
-          `rgba(167, 139, 250, ${opacity})`, // lime-400
-          `rgba(139, 92, 246, ${opacity})`, // lime-500
-        `rgba(101, 163, 13, ${opacity})`, // indigo-600
+        `rgba(6, 182, 212, ${opacity})`,    // Cyan
+        `rgba(168, 85, 247, ${opacity})`,   // Purple
+        `rgba(99, 102, 241, ${opacity})`,   // Indigo
       ];
       return colors[Math.floor(Math.random() * colors.length)];
     };
@@ -127,7 +127,7 @@ export default function TechFlow() {
           ctx.beginPath();
           ctx.moveTo(particle.x, particle.y);
           ctx.lineTo(connectedParticle.x, connectedParticle.y);
-          ctx.strokeStyle = `rgba(101, 163, 13, ${opacity * 0.2})`;
+          ctx.strokeStyle = particle.color.replace(/[\d.]+\)$/g, `${opacity * 0.15})`);
           ctx.lineWidth = 1;
           ctx.stroke();
         });

@@ -9,10 +9,9 @@ import ThemeToggle from "@/components/theme-toggle";
 interface NavbarProps {
   language: "es" | "en";
   onLanguageChange: (lang: "es" | "en") => void;
-  onCVDownload: () => void;
 }
 
-export default function Navbar({ language, onLanguageChange, onCVDownload }: NavbarProps) {
+export default function Navbar({ language, onLanguageChange }: NavbarProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {
