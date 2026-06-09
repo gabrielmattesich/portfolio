@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.11](https://github.com/gabrielmattesich/portafolio/compare/v1.1.10...v1.1.11) (2026-06-09)
+
+
+### Bug Fixes
+
+* header ([c44eabc](https://github.com/gabrielmattesich/portafolio/commit/c44eabc87ed67aee7959e0b87ba8a39be545d117))
+* scroll ([d1c0a3f](https://github.com/gabrielmattesich/portafolio/commit/d1c0a3f2be2800139a47c80c9477569dc89351f0))
+
 ### [1.1.10](https://github.com/gabrielmattesich/portafolio/compare/v1.1.9...v1.1.10) (2026-06-09)
 
 
