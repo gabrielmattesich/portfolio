@@ -1,6 +1,5 @@
 export const timeCounter = (arg?: Date) => {
-  let startDate: Date
-  !arg ? startDate = new Date("2017-03-10") : startDate = arg;
+  const startDate = arg || new Date("2017-03-10");
   const now = new Date();
   const years = now.getFullYear() - startDate.getFullYear();
   return years
