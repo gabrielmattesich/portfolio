@@ -3,8 +3,10 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 import ThemeToggle from "@/components/theme-toggle";
+import logoImg from "../public/los-anteojos.png";
 
 interface NavbarProps {
   language: "es" | "en";
@@ -68,9 +70,13 @@ export default function Navbar({ language, onLanguageChange }: NavbarProps) {
             className="flex items-center gap-2 cursor-pointer focus:outline-none"
             whileHover={{ scale: 1.05 }}
           >
-            <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-purple-500 font-mono tracking-wider">
-              GM
-            </span>
+            <Image 
+              src={logoImg} 
+              alt="Logo" 
+              width={32} 
+              height={32} 
+              className="object-contain"
+            />
           </motion.button>
 
           {/* Desktop Navigation */}

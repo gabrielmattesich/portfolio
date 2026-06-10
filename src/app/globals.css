@@ -49,47 +49,47 @@
   }
 
   /* ============================================ */
-  /* LIGHT MODE - Modern & Elegant */
+  /* LIGHT MODE - Minimalist */
   /* ============================================ */
   .light {
-    --background: 210 20% 98%;
-    --foreground: 222 47% 11%;
+    --background: 0 0% 100%;
+    --foreground: 215 25% 27%;
 
-    --muted: 210 40% 92%;
-    --muted-foreground: 215 20% 40%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 215 16% 47%;
 
-    --accent: 210 40% 94%;
-    --accent-foreground: 222 47% 11%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 215 25% 27%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
+    --popover-foreground: 215 25% 27%;
 
-    --border: 214 20% 85%;
-    --input: 214 20% 92%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
+    --card-foreground: 215 25% 27%;
 
-    --primary: 195 100% 45%;
+    --primary: 215 25% 27%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 142 76% 40%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 215 25% 27%;
 
-    --destructive: 0 84% 60%;
+    --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --ring: 195 100% 45%;
+    --ring: 215 25% 27%;
     --radius: 1rem;
 
-    /* Theme-specific colors */
-    --theme-bg-primary: 210 20% 98%;
-    --theme-bg-secondary: 220 15% 95%;
-    --theme-text-primary: 222 47% 11%;
-    --theme-text-secondary: 215 20% 35%;
-    --theme-accent-1: 195 100% 45%;
-    --theme-accent-2: 271 81% 60%;
-    --theme-accent-3: 142 76% 40%;
+    /* Theme-specific colors - Monochrome/Minimalist */
+    --theme-bg-primary: 0 0% 100%;
+    --theme-bg-secondary: 0 0% 98%;
+    --theme-text-primary: 215 25% 27%;
+    --theme-text-secondary: 215 16% 47%;
+    --theme-accent-1: 215 25% 27%;
+    --theme-accent-2: 215 16% 47%;
+    --theme-accent-3: 215 16% 67%;
   }
 
   /* ============================================ */
@@ -236,15 +236,9 @@ html {
   pointer-events: none;
 }
 
-/* Light Mode Gradient - Modern & Soft */
+/* Light Mode Gradient - Minimalist Soft Background */
 .light .mesh-gradient {
-  background: linear-gradient(135deg,
-    #F8FAFC 0%,
-    #EFF6FF 25%,
-    #F0F9FF 50%,
-    #ECFDF5 75%,
-    #F8FAFC 100%
-  );
+  background: #FAFAFA;
   position: relative;
 }
 
@@ -256,17 +250,9 @@ html {
   right: 0;
   bottom: 0;
   background:
-    radial-gradient(circle at 15% 25%, rgba(6, 182, 212, 0.12) 0%, transparent 45%),
-    radial-gradient(circle at 85% 75%, rgba(168, 85, 247, 0.10) 0%, transparent 45%),
-    radial-gradient(circle at 50% 50%, rgba(34, 197, 94, 0.08) 0%, transparent 40%),
-    radial-gradient(circle at 70% 20%, rgba(251, 146, 60, 0.06) 0%, transparent 35%);
+    radial-gradient(circle at 15% 25%, rgba(0, 0, 0, 0.02) 0%, transparent 45%),
+    radial-gradient(circle at 85% 75%, rgba(0, 0, 0, 0.015) 0%, transparent 45%);
   pointer-events: none;
-  animation: lightPulse 15s ease-in-out infinite;
-}
-
-@keyframes lightPulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.85; }
 }
 
 /* Tech Mode Gradient - Neon/Cyberpunk */
@@ -309,121 +295,98 @@ html {
     0 0 60px rgba(255, 0, 255, 0.1);
 }
 
-/* Light Mode - Modern Glass Effects */
+/* Light Mode - Minimalist Glass Effects */
 .light .glass-card {
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(6, 182, 212, 0.15);
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
   box-shadow:
-    0 8px 32px 0 rgba(6, 182, 212, 0.08),
-    0 4px 16px 0 rgba(168, 85, 247, 0.06),
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.8);
+    0 4px 6px -1px rgba(0, 0, 0, 0.05),
+    0 2px 4px -2px rgba(0, 0, 0, 0.025);
 }
 
 .light .glass-card:hover {
-  background: rgba(255, 255, 255, 0.85);
-  border-color: rgba(6, 182, 212, 0.25);
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(0, 0, 0, 0.08);
   box-shadow:
-    0 12px 40px 0 rgba(6, 182, 212, 0.12),
-    0 6px 20px 0 rgba(168, 85, 247, 0.08),
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
+    0 10px 15px -3px rgba(0, 0, 0, 0.05),
+    0 4px 6px -4px rgba(0, 0, 0, 0.025);
   transform: translateY(-2px);
   transition: all 0.3s ease;
 }
 
 .light .glass-container {
-  background: rgba(255, 255, 255, 0.65);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(6, 182, 212, 0.12);
-  box-shadow:
-    0 4px 24px 0 rgba(6, 182, 212, 0.06),
-    0 2px 12px 0 rgba(168, 85, 247, 0.04),
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
 }
 
 /* Light Mode - Text colors with better contrast */
 .light h1, .light h2, .light h3, .light h4, .light h5, .light h6 {
-  color: hsl(222, 47%, 11%);
+  color: hsl(215, 25%, 27%);
 }
 
 .light p, .light span, .light div {
-  color: hsl(215, 25%, 27%);
+  color: hsl(215, 16%, 47%);
 }
 
 /* Light Mode - Navbar styling */
 .light nav {
-  background: rgba(255, 255, 255, 0.7) !important;
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(6, 182, 212, 0.15);
-  box-shadow: 0 4px 16px rgba(6, 182, 212, 0.08);
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
 }
 
 /* Light Mode - Badge & Button improvements */
 .light .bg-cyan-500\/20 {
-  background-color: rgba(6, 182, 212, 0.15) !important;
-  border-color: rgba(6, 182, 212, 0.3) !important;
+  background-color: rgba(0, 0, 0, 0.03) !important;
+  border-color: rgba(0, 0, 0, 0.05) !important;
+  color: hsl(215, 16%, 47%) !important;
 }
 
 .light .text-cyan-400,
-.light .text-cyan-300 {
-  color: rgb(8, 145, 178) !important;
-}
-
-.light .text-purple-400 {
-  color: rgb(147, 51, 234) !important;
-}
-
+.light .text-cyan-300,
+.light .text-purple-400,
 .light .text-emerald-400 {
-  color: rgb(16, 185, 129) !important;
+  color: hsl(0, 0%, 20%) !important;
 }
 
 .light .text-slate-300,
 .light .text-slate-400 {
-  color: hsl(215, 20%, 40%) !important;
+  color: hsl(0, 0%, 45%) !important;
 }
 
 .light .text-white {
-  color: hsl(222, 47%, 11%) !important;
+  color: hsl(215, 25%, 27%) !important;
 }
 
-/* Light Mode - Gradient text improvements */
+/* Light Mode - Gradient text improvements (Monochrome) */
 .light .bg-clip-text {
   -webkit-background-clip: text;
   background-clip: text;
 }
 
-.light .bg-gradient-to-r.from-cyan-400.to-purple-500 {
-  background-image: linear-gradient(to right, rgb(6, 182, 212), rgb(168, 85, 247)) !important;
-}
-
-.light .bg-gradient-to-r.from-emerald-400.to-cyan-500 {
-  background-image: linear-gradient(to right, rgb(16, 185, 129), rgb(6, 182, 212)) !important;
-}
-
-.light .bg-gradient-to-r.from-purple-400.to-pink-500 {
-  background-image: linear-gradient(to right, rgb(168, 85, 247), rgb(236, 72, 153)) !important;
-}
-
+.light .bg-gradient-to-r.from-cyan-400.to-purple-500,
+.light .bg-gradient-to-r.from-emerald-400.to-cyan-500,
+.light .bg-gradient-to-r.from-purple-400.to-pink-500,
 .light .bg-gradient-to-r.from-orange-400.to-red-500 {
-  background-image: linear-gradient(to right, rgb(251, 146, 60), rgb(239, 68, 68)) !important;
+  background-image: linear-gradient(to right, hsl(215, 25%, 27%), hsl(215, 16%, 47%)) !important;
 }
 
 /* Light Mode - Profile image border */
 .light .border-white\/20 {
-  border-color: rgba(6, 182, 212, 0.2) !important;
+  border-color: rgba(0, 0, 0, 0.05) !important;
 }
 
 /* Light Mode - Timeline dot colors */
-.light .bg-green-400 {
-  background-color: rgb(34, 197, 94) !important;
-  border-color: rgb(34, 197, 94) !important;
-}
-
+.light .bg-green-400,
 .light .bg-cyan-500 {
-  background-color: rgb(6, 182, 212) !important;
-  border-color: rgb(6, 182, 212) !important;
+  background-color: hsl(215, 25%, 27%) !important;
+  border-color: hsl(215, 25%, 27%) !important;
 }
 
 @keyframes spin-slow {
@@ -527,18 +490,18 @@ html {
 
 /* Light theme overrides for global scrollbar */
 .light ::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.5);
-  border-left: 1px solid rgba(6, 182, 212, 0.1);
+  background: rgba(0, 0, 0, 0.02);
+  border-left: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .light ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, rgba(6, 182, 212, 0.6), rgba(168, 85, 247, 0.6));
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .light ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(to bottom, rgb(6, 182, 212), rgb(168, 85, 247));
+  background: rgba(0, 0, 0, 0.4);
 }
 
 .light {
-  scrollbar-color: rgba(168, 85, 247, 0.6) rgba(255, 255, 255, 0.5);
+  scrollbar-color: rgba(0, 0, 0, 0.3) rgba(0, 0, 0, 0.02);
 }
