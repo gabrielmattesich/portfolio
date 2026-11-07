@@ -43,25 +43,33 @@ export default function Navbar({
     { href: "#contacto", id: "contacto", label: content.contact, num: "05" },
   ];
 
-  // Active section scroll detection
+  // Active section scroll detection using getBoundingClientRect
   useEffect(() => {
     const sectionIds = ["pilares", "trayectoria", "stack", "credenciales", "contacto"];
 
     const handleScroll = () => {
-      const scrollPos = window.scrollY + 140;
-
-      // If at top
-      if (window.scrollY < 200) {
+      // If near the top
+      if (window.scrollY < 160) {
         setActiveSection("");
         return;
       }
 
+      // If reached the bottom of the page, activate contact section
+      if (
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 80
+      ) {
+        setActiveSection("contacto");
+        return;
+      }
+
+      // Check section bounding rect relative to viewport
       for (const id of sectionIds) {
         const el = document.getElementById(id);
         if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPos >= top && scrollPos < top + height) {
+          const rect = el.getBoundingClientRect();
+          // Active when section top is near the navbar and bottom is still visible
+          if (rect.top <= 160 && rect.bottom >= 100) {
             setActiveSection(id);
             return;
           }
@@ -83,7 +91,9 @@ export default function Navbar({
     closeMobileMenu();
 
     if (href === "#") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }, 50);
       window.history.pushState(null, "", "/");
       setActiveSection("");
       return;
@@ -95,12 +105,14 @@ export default function Navbar({
     if (element) {
       const navOffset = 70;
       const elementPosition = element.getBoundingClientRect().top + window.scrollY;
-      const targetPosition = elementPosition - navOffset;
+      const targetPosition = Math.max(0, elementPosition - navOffset);
 
-      window.scrollTo({
-        top: targetPosition,
-        behavior: "smooth",
-      });
+      setTimeout(() => {
+        window.scrollTo({
+          top: targetPosition,
+          behavior: "smooth",
+        });
+      }, 50);
 
       window.history.pushState(null, "", href);
       setActiveSection(targetId);
@@ -304,88 +316,105 @@ export default function Navbar({
         </div>
       </div>
 
-      {/* Mobile Slide-down Navigation Menu */}
+      {/* Mobile Slide-down Navigation Menu as Overlay */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-            className="md:hidden overflow-hidden border-b border-brand-border bg-brand-bg/95 backdrop-blur-xl px-4 pt-3 pb-6 space-y-4 shadow-2xl"
-          >
-            <nav className="flex flex-col space-y-1 text-sm font-medium">
-              {allNavLinks.map((link, idx) => {
-                const isActive = activeSection === link.id;
-
-                return (
-                  <motion.a
-                    key={link.href}
-                    href={link.href}
-                    onClick={(e) => handleNavClick(e, link.href)}
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: idx * 0.04 }}
-                    className={`flex items-center justify-between p-3 rounded-lg transition-colors ${
-                      isActive
-                        ? "text-brand-accent font-semibold bg-brand-accentDim border border-brand-accent/30"
-                        : "text-slate-300 hover:text-brand-accent hover:bg-brand-surface border border-transparent"
-                    }`}
-                  >
-                    <span>
-                      {"//"} {link.num}. {link.label}
-                    </span>
-                    <ArrowRight
-                      className={`w-4 h-4 ${
-                        isActive ? "text-brand-accent" : "text-brand-dim"
-                      }`}
-                    />
-                  </motion.a>
-                );
-              })}
-            </nav>
-
-            {/* Mobile Social Links & Direct Email Action */}
+          <>
+            {/* Backdrop overlay: closes menu on outside tap without shifting layout */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.22 }}
-              className="pt-3 border-t border-brand-border/60 flex items-center justify-between px-2 text-xs font-mono"
-            >
-              <div className="flex items-center gap-3 text-brand-muted">
-                <a
-                  href="https://www.linkedin.com/in/gabriel-mattesich"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-brand-accent flex items-center gap-1.5 transition-colors"
-                >
-                  <Linkedin className="w-4 h-4" />
-                  <span>LinkedIn</span>
-                </a>
-                <span>•</span>
-                <a
-                  href="https://github.com/gabrielmattesich"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-brand-accent flex items-center gap-1.5 transition-colors"
-                >
-                  <Github className="w-4 h-4" />
-                  <span>GitHub</span>
-                </a>
-              </div>
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={closeMobileMenu}
+              className="md:hidden fixed inset-0 top-16 bg-black/60 backdrop-blur-sm -z-10"
+              aria-hidden="true"
+            />
 
-              <button
-                type="button"
-                onClick={() => {
-                  onCopyEmail();
-                  closeMobileMenu();
-                }}
-                className="text-brand-accent hover:underline font-semibold"
+            {/* Dropdown panel positioned as absolute overlay */}
+            <motion.div
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="md:hidden absolute top-full left-0 right-0 w-full border-b border-brand-border bg-brand-bg/95 backdrop-blur-2xl px-4 pt-3 pb-6 space-y-4 shadow-2xl max-h-[calc(100vh-4.5rem)] overflow-y-auto"
+            >
+              <nav className="flex flex-col space-y-1 text-sm font-medium">
+                {allNavLinks.map((link, idx) => {
+                  const isActive = activeSection === link.id;
+
+                  return (
+                    <motion.div
+                      key={link.href}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: idx * 0.03 }}
+                    >
+                      <a
+                        href={link.href}
+                        onClick={(e) => handleNavClick(e, link.href)}
+                        className={`flex items-center justify-between p-3 rounded-lg transition-colors cursor-pointer ${
+                          isActive
+                            ? "text-brand-accent font-semibold bg-brand-accentDim border border-brand-accent/30"
+                            : "text-slate-300 hover:text-brand-accent hover:bg-brand-surface border border-transparent"
+                        }`}
+                      >
+                        <span>
+                          {"//"} {link.num}. {link.label}
+                        </span>
+                        <ArrowRight
+                          className={`w-4 h-4 ${
+                            isActive ? "text-brand-accent" : "text-brand-dim"
+                          }`}
+                        />
+                      </a>
+                    </motion.div>
+                  );
+                })}
+              </nav>
+
+              {/* Mobile Social Links & Direct Email Action */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.18 }}
+                className="pt-3 border-t border-brand-border/60 flex items-center justify-between px-2 text-xs font-mono"
               >
-                {language === "es" ? "Copiar Email" : "Copy Email"}
-              </button>
+                <div className="flex items-center gap-3 text-brand-muted">
+                  <a
+                    href="https://www.linkedin.com/in/gabriel-mattesich"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-brand-accent flex items-center gap-1.5 transition-colors"
+                  >
+                    <Linkedin className="w-4 h-4" />
+                    <span>LinkedIn</span>
+                  </a>
+                  <span>•</span>
+                  <a
+                    href="https://github.com/gabrielmattesich"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-brand-accent flex items-center gap-1.5 transition-colors"
+                  >
+                    <Github className="w-4 h-4" />
+                    <span>GitHub</span>
+                  </a>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    onCopyEmail();
+                    closeMobileMenu();
+                  }}
+                  className="text-brand-accent hover:underline font-semibold cursor-pointer"
+                >
+                  {language === "es" ? "Copiar Email" : "Copy Email"}
+                </button>
+              </motion.div>
             </motion.div>
-          </motion.div>
+          </>
         )}
       </AnimatePresence>
     </motion.header>
