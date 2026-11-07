@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
-import Link from "next/link";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Github, Linkedin, Menu, X, ArrowRight } from "lucide-react";
@@ -22,6 +21,7 @@ export default function Navbar({
   onCopyEmail,
 }: NavbarProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState<string>("");
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen((prev) => !prev);
@@ -31,12 +31,93 @@ export default function Navbar({
     setIsMobileMenuOpen(false);
   };
 
-  const navLinks = [
-    { href: "#pilares", label: content.pillars, num: "01" },
-    { href: "#trayectoria", label: content.experience, num: "02" },
-    { href: "#stack", label: content.stack, num: "03" },
-    { href: "#credenciales", label: content.credentials, num: "04" },
+  const desktopNavLinks = [
+    { href: "#pilares", id: "pilares", label: content.pillars, num: "01" },
+    { href: "#trayectoria", id: "trayectoria", label: content.experience, num: "02" },
+    { href: "#stack", id: "stack", label: content.stack, num: "03" },
+    { href: "#credenciales", id: "credenciales", label: content.credentials, num: "04" },
   ];
+
+  const allNavLinks = [
+    ...desktopNavLinks,
+    { href: "#contacto", id: "contacto", label: content.contact, num: "05" },
+  ];
+
+  // Active section scroll detection using getBoundingClientRect
+  useEffect(() => {
+    const sectionIds = ["pilares", "trayectoria", "stack", "credenciales", "contacto"];
+
+    const handleScroll = () => {
+      // If near the top
+      if (window.scrollY < 160) {
+        setActiveSection("");
+        return;
+      }
+
+      // If reached the bottom of the page, activate contact section
+      if (
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 80
+      ) {
+        setActiveSection("contacto");
+        return;
+      }
+
+      // Check section bounding rect relative to viewport
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          // Active when section top is near the navbar and bottom is still visible
+          if (rect.top <= 160 && rect.bottom >= 100) {
+            setActiveSection(id);
+            return;
+          }
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Guaranteed smooth scroll handler with sticky header offset
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
+    e.preventDefault();
+    closeMobileMenu();
+
+    if (href === "#") {
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }, 50);
+      window.history.pushState(null, "", "/");
+      setActiveSection("");
+      return;
+    }
+
+    const targetId = href.replace("#", "");
+    const element = document.getElementById(targetId);
+
+    if (element) {
+      const navOffset = 70;
+      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+      const targetPosition = Math.max(0, elementPosition - navOffset);
+
+      setTimeout(() => {
+        window.scrollTo({
+          top: targetPosition,
+          behavior: "smooth",
+        });
+      }, 50);
+
+      window.history.pushState(null, "", href);
+      setActiveSection(targetId);
+    }
+  };
 
   return (
     <motion.header
@@ -47,7 +128,11 @@ export default function Navbar({
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
         {/* Logo / Avatar Identifier */}
-        <Link href="#" className="flex items-center gap-2.5 group flex-shrink-0">
+        <a
+          href="#"
+          onClick={(e) => handleNavClick(e, "#")}
+          className="flex items-center gap-2.5 group flex-shrink-0 cursor-pointer"
+        >
           <motion.div
             className="relative flex-shrink-0"
             whileHover={{ scale: 1.06 }}
@@ -79,20 +164,31 @@ export default function Navbar({
               <span className="hidden sm:inline">| </span>Since 1996<span className="hidden sm:inline"> |</span>
             </span>
           </div>
-        </Link>
+        </a>
 
         {/* Quick Links (Desktop) */}
         <nav className="hidden md:flex items-center gap-6 lg:gap-7 text-xs font-medium uppercase tracking-wider text-brand-muted">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="relative py-1 hover:text-slate-100 transition-colors group"
-            >
-              <span>{link.label}</span>
-              <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-brand-accent transition-all duration-300 group-hover:w-full rounded-full" />
-            </a>
-          ))}
+          {desktopNavLinks.map((link) => {
+            const isActive = activeSection === link.id;
+
+            return (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={(e) => handleNavClick(e, link.href)}
+                className={`relative py-1 transition-colors group ${
+                  isActive ? "text-brand-accent font-semibold" : "hover:text-slate-100"
+                }`}
+              >
+                <span>{link.label}</span>
+                <span
+                  className={`absolute bottom-0 left-0 h-[2px] bg-brand-accent transition-all duration-300 rounded-full ${
+                    isActive ? "w-full" : "w-0 group-hover:w-full"
+                  }`}
+                />
+              </a>
+            );
+          })}
         </nav>
 
         {/* Right side items: Language switcher, desktop socials, contact, hamburger */}
@@ -172,9 +268,14 @@ export default function Navbar({
           {/* Contact Direct button (Desktop / Tablet) */}
           <motion.a
             href="#contacto"
+            onClick={(e) => handleNavClick(e, "#contacto")}
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
-            className="hidden sm:inline-flex items-center text-xs font-mono font-medium border border-brand-borderLight hover:border-brand-accent bg-brand-surface px-3 py-1.5 rounded-md transition-all text-slate-200 hover:text-white"
+            className={`hidden sm:inline-flex items-center text-xs font-mono font-medium border px-3 py-1.5 rounded-md transition-all ${
+              activeSection === "contacto"
+                ? "border-brand-accent bg-brand-accent text-slate-950 font-bold"
+                : "border-brand-borderLight hover:border-brand-accent bg-brand-surface text-slate-200 hover:text-white"
+            }`}
           >
             {content.contact}
           </motion.a>
@@ -215,88 +316,105 @@ export default function Navbar({
         </div>
       </div>
 
-      {/* Mobile Slide-down Navigation Menu */}
+      {/* Mobile Slide-down Navigation Menu as Overlay */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-            className="md:hidden overflow-hidden border-b border-brand-border bg-brand-bg/95 backdrop-blur-xl px-4 pt-3 pb-6 space-y-4 shadow-2xl"
-          >
-            <nav className="flex flex-col space-y-1 text-sm font-medium">
-              {navLinks.map((link, idx) => (
-                <motion.a
-                  key={link.href}
-                  href={link.href}
-                  onClick={closeMobileMenu}
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: idx * 0.04 }}
-                  className="flex items-center justify-between p-3 rounded-lg text-slate-300 hover:text-brand-accent hover:bg-brand-surface transition-colors"
-                >
-                  <span>
-                    {"//"} {link.num}. {link.label}
-                  </span>
-                  <ArrowRight className="w-4 h-4 text-brand-dim" />
-                </motion.a>
-              ))}
-
-              <motion.a
-                href="#contacto"
-                onClick={closeMobileMenu}
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.18 }}
-                className="flex items-center justify-between p-3 rounded-lg text-brand-accent font-semibold bg-brand-accentDim border border-brand-accent/20 transition-colors"
-              >
-                <span>{"//"} 05. {content.contact}</span>
-                <ArrowRight className="w-4 h-4" />
-              </motion.a>
-            </nav>
-
-            {/* Mobile Social Links & Direct Email Action */}
+          <>
+            {/* Backdrop overlay: closes menu on outside tap without shifting layout */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.22 }}
-              className="pt-3 border-t border-brand-border/60 flex items-center justify-between px-2 text-xs font-mono"
-            >
-              <div className="flex items-center gap-3 text-brand-muted">
-                <a
-                  href="https://www.linkedin.com/in/gabriel-mattesich"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-brand-accent flex items-center gap-1.5 transition-colors"
-                >
-                  <Linkedin className="w-4 h-4" />
-                  <span>LinkedIn</span>
-                </a>
-                <span>•</span>
-                <a
-                  href="https://github.com/gabrielmattesich"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-brand-accent flex items-center gap-1.5 transition-colors"
-                >
-                  <Github className="w-4 h-4" />
-                  <span>GitHub</span>
-                </a>
-              </div>
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={closeMobileMenu}
+              className="md:hidden fixed inset-0 top-16 bg-black/60 backdrop-blur-sm -z-10"
+              aria-hidden="true"
+            />
 
-              <button
-                type="button"
-                onClick={() => {
-                  onCopyEmail();
-                  closeMobileMenu();
-                }}
-                className="text-brand-accent hover:underline font-semibold"
+            {/* Dropdown panel positioned as absolute overlay */}
+            <motion.div
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="md:hidden absolute top-full left-0 right-0 w-full border-b border-brand-border bg-brand-bg/95 backdrop-blur-2xl px-4 pt-3 pb-6 space-y-4 shadow-2xl max-h-[calc(100vh-4.5rem)] overflow-y-auto"
+            >
+              <nav className="flex flex-col space-y-1 text-sm font-medium">
+                {allNavLinks.map((link, idx) => {
+                  const isActive = activeSection === link.id;
+
+                  return (
+                    <motion.div
+                      key={link.href}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: idx * 0.03 }}
+                    >
+                      <a
+                        href={link.href}
+                        onClick={(e) => handleNavClick(e, link.href)}
+                        className={`flex items-center justify-between p-3 rounded-lg transition-colors cursor-pointer ${
+                          isActive
+                            ? "text-brand-accent font-semibold bg-brand-accentDim border border-brand-accent/30"
+                            : "text-slate-300 hover:text-brand-accent hover:bg-brand-surface border border-transparent"
+                        }`}
+                      >
+                        <span>
+                          {"//"} {link.num}. {link.label}
+                        </span>
+                        <ArrowRight
+                          className={`w-4 h-4 ${
+                            isActive ? "text-brand-accent" : "text-brand-dim"
+                          }`}
+                        />
+                      </a>
+                    </motion.div>
+                  );
+                })}
+              </nav>
+
+              {/* Mobile Social Links & Direct Email Action */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.18 }}
+                className="pt-3 border-t border-brand-border/60 flex items-center justify-between px-2 text-xs font-mono"
               >
-                {language === "es" ? "Copiar Email" : "Copy Email"}
-              </button>
+                <div className="flex items-center gap-3 text-brand-muted">
+                  <a
+                    href="https://www.linkedin.com/in/gabriel-mattesich"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-brand-accent flex items-center gap-1.5 transition-colors"
+                  >
+                    <Linkedin className="w-4 h-4" />
+                    <span>LinkedIn</span>
+                  </a>
+                  <span>•</span>
+                  <a
+                    href="https://github.com/gabrielmattesich"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-brand-accent flex items-center gap-1.5 transition-colors"
+                  >
+                    <Github className="w-4 h-4" />
+                    <span>GitHub</span>
+                  </a>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    onCopyEmail();
+                    closeMobileMenu();
+                  }}
+                  className="text-brand-accent hover:underline font-semibold cursor-pointer"
+                >
+                  {language === "es" ? "Copiar Email" : "Copy Email"}
+                </button>
+              </motion.div>
             </motion.div>
-          </motion.div>
+          </>
         )}
       </AnimatePresence>
     </motion.header>
