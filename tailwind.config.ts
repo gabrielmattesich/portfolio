@@ -9,7 +9,25 @@ const config: Config = {
   ],
   theme: {
   	extend: {
+  		fontFamily: {
+  			sans: ["var(--font-geist-sans)", "Inter", "sans-serif"],
+  			mono: ["var(--font-geist-mono)", "JetBrains Mono", "monospace"],
+  		},
   		colors: {
+  			brand: {
+  				bg: '#090a0d',
+  				surface: '#111218',
+  				card: '#161822',
+  				cardHover: '#1c1e2b',
+  				border: '#242735',
+  				borderLight: '#32364a',
+  				accent: '#10b981',       /* Emerald FinTech */
+  				accentHover: '#059669',
+  				accentDim: 'rgba(16, 185, 129, 0.1)',
+  				cyanAccent: '#06b6d4',
+  				muted: '#94a3b8',
+  				dim: '#64748b'
+  			},
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {

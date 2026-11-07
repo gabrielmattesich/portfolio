@@ -16,8 +16,9 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Gabriel Mattesich - Portfolio",
-  description: "Gabriel Mattesich's portfolio - Software Developer with 7+ years of experience",
+  title: "Gabriel Mattesich | Senior Backend Engineer & Software Architect",
+  description:
+    "Senior Backend Engineer & Technical Lead especializado en arquitecturas distribuidas de alta disponibilidad, microservicios orientados a eventos y FinTech.",
 };
 
 export default function RootLayout({
@@ -26,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="dark scroll-smooth" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased main`}
       >
