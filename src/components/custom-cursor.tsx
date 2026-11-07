@@ -70,9 +70,9 @@ export default function CustomCursor() {
         animate={{
           width: isHovered ? 48 : 24,
           height: isHovered ? 48 : 24,
-          backgroundColor: isHovered ? "rgba(168, 85, 247, 0.15)" : "rgba(6, 182, 212, 0)",
-          borderColor: isHovered ? "rgba(168, 85, 247, 0.8)" : "rgba(6, 182, 212, 0.5)",
-          boxShadow: isHovered ? "0 0 16px rgba(168, 85, 247, 0.4)" : "none",
+          backgroundColor: isHovered ? "rgba(16, 185, 129, 0.15)" : "rgba(6, 182, 212, 0)",
+          borderColor: isHovered ? "rgba(16, 185, 129, 0.8)" : "rgba(6, 182, 212, 0.5)",
+          boxShadow: isHovered ? "0 0 16px rgba(16, 185, 129, 0.4)" : "none",
         }}
         transition={{ type: "tween", ease: "backOut", duration: 0.2 }}
         style={{

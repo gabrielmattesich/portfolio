@@ -1,7 +1,7 @@
 "use client";
 
-import React from "react";
-import { ExternalLink } from "lucide-react";
+import React, { useState } from "react";
+import { ExternalLink, Pause, Play } from "lucide-react";
 import { PortfolioContent, CertificationItem } from "@/types/portfolio.type";
 
 interface CredentialsSectionProps {
@@ -11,6 +11,8 @@ interface CredentialsSectionProps {
 export default function CredentialsSection({
   content,
 }: CredentialsSectionProps) {
+  const [isPaused, setIsPaused] = useState(false);
+
   const getDateColorClass = (accent?: CertificationItem["dateAccent"]) => {
     switch (accent) {
       case "emerald":
@@ -26,9 +28,13 @@ export default function CredentialsSection({
   // Duplicating the items for a seamless infinite loop along the X axis
   const marqueeItems = [...content.items, ...content.items];
 
+  const togglePause = () => {
+    setIsPaused((prev) => !prev);
+  };
+
   return (
     <section id="credenciales" className="space-y-6 scroll-mt-24 overflow-hidden">
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2">
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
         <div className="space-y-2">
           <span className="text-xs font-mono text-brand-accent uppercase tracking-widest font-semibold">
             {content.sectionTag}
@@ -41,10 +47,26 @@ export default function CredentialsSection({
           </p>
         </div>
 
-        <span className="text-[11px] font-mono text-brand-dim hidden sm:inline-flex items-center gap-1.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-brand-accent/60 animate-pulse" />
-          Pausar al pasar el cursor
-        </span>
+        {/* Interactive Pause/Play Button (Mobile & Desktop) */}
+        <button
+          type="button"
+          onClick={togglePause}
+          className="self-start sm:self-auto inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-brand-border bg-brand-surface hover:border-brand-accent/50 text-xs font-mono text-slate-300 transition-colors cursor-pointer select-none active:scale-95"
+          aria-label={isPaused ? "Reanudar animación" : "Pausar animación"}
+        >
+          {isPaused ? (
+            <>
+              <Play className="w-3 h-3 text-brand-accent fill-brand-accent" />
+              <span>Reanudar</span>
+            </>
+          ) : (
+            <>
+              <Pause className="w-3 h-3 text-brand-accent" />
+              <span className="hidden sm:inline">Pausar al pasar el cursor</span>
+              <span className="sm:hidden">Pausar</span>
+            </>
+          )}
+        </button>
       </div>
 
       {/* Infinite Horizontal Marquee Container */}
@@ -54,7 +76,12 @@ export default function CredentialsSection({
         <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-12 sm:w-28 bg-gradient-to-l from-brand-bg to-transparent z-10" />
 
         {/* Marquee Track moving along X */}
-        <div className="flex gap-4 w-max animate-marquee hover:[animation-play-state:paused] focus-within:[animation-play-state:paused]">
+        <div
+          onClick={togglePause}
+          onTouchStart={() => setIsPaused(true)}
+          style={{ animationPlayState: isPaused ? "paused" : "running" }}
+          className="flex gap-4 w-max animate-marquee hover:[animation-play-state:paused] focus-within:[animation-play-state:paused] cursor-grab active:cursor-grabbing"
+        >
           {marqueeItems.map((cert, index) => {
             const CardTag = cert.link ? "a" : "div";
             const linkProps = cert.link
@@ -62,6 +89,7 @@ export default function CredentialsSection({
                   href: cert.link,
                   target: "_blank",
                   rel: "noopener noreferrer",
+                  onClick: (e: React.MouseEvent) => e.stopPropagation(),
                 }
               : {};
 

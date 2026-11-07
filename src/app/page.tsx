@@ -13,6 +13,7 @@ import CredentialsSection from "@/components/portfolio/CredentialsSection";
 import ContactSection from "@/components/portfolio/ContactSection";
 import Footer from "@/components/portfolio/Footer";
 import Toast from "@/components/portfolio/Toast";
+import InitialLoader from "@/components/portfolio/InitialLoader";
 
 export default function PortfolioPage() {
   const [language, setLanguage] = useState<Language>("es");
@@ -66,6 +67,9 @@ export default function PortfolioPage() {
 
   return (
     <div className="min-h-screen relative flex flex-col font-sans bg-brand-bg text-slate-100 selection:bg-brand-accent selection:text-black scroll-smooth">
+      {/* Initial Boot Sequence Loader */}
+      <InitialLoader />
+
       {/* Background Grids & Radial Hero Glow */}
       <div className="fixed inset-0 bg-grid pointer-events-none z-0" />
       <div className="fixed top-0 left-0 right-0 h-[640px] hero-glow pointer-events-none z-0" />

@@ -274,7 +274,7 @@ export const portfolioContent: Record<Language, PortfolioContent> = {
           title: "Curso Profesional de Arquitectura de Software",
           skills: "Aptitudes: Diseño de software, patrones arquitectónicos y ciclo de vida (SDLC).",
           certId: "d367c68b-0880-4c80-a783-7c49ac02060a",
-          link: "https://platzi.com/p/GabrielMattesich/curso/d367c68b-0880-4c80-a783-7c49ac02060a/diploma/detalle/",
+          link: "https://platzi.com/p/GabrielMattesich/curso/1248-course/diploma/detalle/",
           dateAccent: "emerald",
         },
         {
@@ -292,7 +292,7 @@ export const portfolioContent: Record<Language, PortfolioContent> = {
           title: "Curso de Arquitectura de Software Aplicada",
           skills: "Aptitudes: Arquitectura de sistemas, desarrollo de software y diseño de componentes.",
           certId: "2af2999b-b898-44fd-86b0-93da75ba4c01",
-          link: "https://platzi.com/p/GabrielMattesich/curso/2af2999b-b898-44fd-86b0-93da75ba4c01/diploma/detalle/",
+          link: "https://platzi.com/p/GabrielMattesich/curso/12192-course/diploma/detalle/",
           dateAccent: "dim",
         },
         {
@@ -301,7 +301,7 @@ export const portfolioContent: Record<Language, PortfolioContent> = {
           title: "Curso de AWS Certified Solutions Architect Associate",
           skills: "Aptitudes: Amazon Web Services (AWS), diseño de arquitecturas resilientes y software empresarial.",
           certId: "709d4a6b-5fb7-4174-adf4-f53baa760b13",
-          link: "https://platzi.com/p/GabrielMattesich/curso/709d4a6b-5fb7-4174-adf4-f53baa760b13/diploma/detalle/",
+          link: "https://platzi.com/p/GabrielMattesich/curso/11652-course/diploma/detalle/",
           dateAccent: "cyan",
         },
         {
@@ -310,7 +310,7 @@ export const portfolioContent: Record<Language, PortfolioContent> = {
           title: "Curso de Fundamentos de Arquitectura de Software",
           skills: "Aptitudes: Arquitectura de sistemas, diseño estructural y ciclo de vida (SDLC).",
           certId: "cfb3a033-6827-4d77-b298-b797dc9fea26",
-          link: "https://platzi.com/p/GabrielMattesich/curso/cfb3a033-6827-4d77-b298-b797dc9fea26/diploma/detalle/",
+          link: "https://platzi.com/p/GabrielMattesich/curso/12061-course/diploma/detalle/",
           dateAccent: "dim",
         },
         {
@@ -319,7 +319,7 @@ export const portfolioContent: Record<Language, PortfolioContent> = {
           title: "Curso de Node.js Avanzado",
           skills: "Aptitudes: Concurrencia, streams, event loop y microservicios con Node.js.",
           certId: "bae4f416-42c9-4f2a-a9d7-c73845b589b0",
-          link: "https://platzi.com/p/GabrielMattesich/curso/bae4f416-42c9-4f2a-a9d7-c73845b589b0/diploma/detalle/",
+          link: "https://platzi.com/p/GabrielMattesich/curso/2272-course/diploma/detalle/",
           dateAccent: "emerald",
         },
       ],
@@ -604,7 +604,7 @@ export const portfolioContent: Record<Language, PortfolioContent> = {
           title: "Professional Software Architecture Course",
           skills: "Skills: Software design, architectural patterns, and SDLC.",
           certId: "d367c68b-0880-4c80-a783-7c49ac02060a",
-          link: "https://platzi.com/p/GabrielMattesich/curso/d367c68b-0880-4c80-a783-7c49ac02060a/diploma/detalle/",
+          link: "https://platzi.com/p/GabrielMattesich/curso/1248-course/diploma/detalle/",
           dateAccent: "emerald",
         },
         {
@@ -622,7 +622,7 @@ export const portfolioContent: Record<Language, PortfolioContent> = {
           title: "Applied Software Architecture Course",
           skills: "Skills: Systems architecture, software development, and component design.",
           certId: "2af2999b-b898-44fd-86b0-93da75ba4c01",
-          link: "https://platzi.com/p/GabrielMattesich/curso/2af2999b-b898-44fd-86b0-93da75ba4c01/diploma/detalle/",
+          link: "https://platzi.com/p/GabrielMattesich/curso/12192-course/diploma/detalle/",
           dateAccent: "dim",
         },
         {
@@ -631,7 +631,7 @@ export const portfolioContent: Record<Language, PortfolioContent> = {
           title: "AWS Certified Solutions Architect Associate Course",
           skills: "Skills: Amazon Web Services (AWS), resilient architecture design, and enterprise software.",
           certId: "709d4a6b-5fb7-4174-adf4-f53baa760b13",
-          link: "https://platzi.com/p/GabrielMattesich/curso/709d4a6b-5fb7-4174-adf4-f53baa760b13/diploma/detalle/",
+          link: "https://platzi.com/p/GabrielMattesich/curso/11652-course/diploma/detalle/",
           dateAccent: "cyan",
         },
         {
@@ -640,7 +640,7 @@ export const portfolioContent: Record<Language, PortfolioContent> = {
           title: "Software Architecture Fundamentals Course",
           skills: "Skills: Systems architecture, structural design, and lifecycle (SDLC).",
           certId: "cfb3a033-6827-4d77-b298-b797dc9fea26",
-          link: "https://platzi.com/p/GabrielMattesich/curso/cfb3a033-6827-4d77-b298-b797dc9fea26/diploma/detalle/",
+          link: "https://platzi.com/p/GabrielMattesich/curso/12061-course/diploma/detalle/",
           dateAccent: "dim",
         },
         {
@@ -649,7 +649,7 @@ export const portfolioContent: Record<Language, PortfolioContent> = {
           title: "Advanced Node.js Course",
           skills: "Skills: Concurrency, streams, event loop, and microservices with Node.js.",
           certId: "bae4f416-42c9-4f2a-a9d7-c73845b589b0",
-          link: "https://platzi.com/p/GabrielMattesich/curso/bae4f416-42c9-4f2a-a9d7-c73845b589b0/diploma/detalle/",
+          link: "https://platzi.com/p/GabrielMattesich/curso/2272-course/diploma/detalle/",
           dateAccent: "emerald",
         },
       ],
